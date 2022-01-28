@@ -1,0 +1,90 @@
+<!-- templates -->
+<h2>{{ title }}</h2>
+<p>{{ age }}</p>
+
+<!-- Directives -->
+<!-- ngFor, ngIf, ngSwitch, ngClass, ngStyle -->
+<ul>
+  <li *ngFor="let item of movies">{{ item }}</li>
+</ul>
+
+<!-- property binding -->
+<img [src]="imageUrl" [alt]="alt" [width]="width" [height]="height" />
+<br />
+
+<!-- class binding -->
+<button (click)="changeColor()">Save</button>
+<p [class.main-title]="isActive">Lorem ipsum dolor sit amet.</p>
+
+<!-- styling binding -->
+<p [style.background]="isActive ? 'blue' : 'green'">
+  Lorem ipsum dolor sit amet.
+</p>
+
+<!-- event binding 
+Event bubbling-->
+<div (click)="onDivClick()">
+  <button (click)="onSave($event)">Save</button>
+</div>
+
+<!-- event filtering -->
+<input type="text" (keyup.enter)="onKeyUp1()" placeholder="type anything" />
+<br />
+<!-- template variables -->
+<input
+  #passwordField
+  type="text"
+  (keyup.enter)="onPassword(passwordField.value)"
+  placeholder="type password"
+/>
+<br />
+
+<!-- 2 way data binding -->
+<input type="email" placeholder="Enter email address" [(ngModel)]="email" />
+<p>{{ email }}</p>
+
+<!-- pipes -->
+<p>{{ movie.title | uppercase }}</p>
+<p>{{ movie.budget | currency: "AUD":false:"3.2-2" }}</p>
+<p>{{ movie.rating | number: "1.2-2" }}</p>
+<p>{{ movie.watchCount | number }}</p>
+<p>{{ movie.releasedDate | date: "short" }}</p>
+
+<!-- Directives 
+1. Structural directives 
+2. Attribute directives
+-->
+<!-- <div *ngIf="names.length > 0; else noNames">
+  <p>List of names</p>
+</div> -->
+
+<!-- <div *ngIf="names.length == 0">
+  <p>There are no names to show</p>
+</div> -->
+
+<!-- <ng-template #noNames>
+  <p>There are no names to show</p>
+</ng-template> -->
+<div *ngIf="names.length > 0; then nameList; else noNames"></div>
+<ng-template #nameList>
+  <p>Name list</p>
+</ng-template>
+<ng-template #noNames>
+  <p>No names</p>
+</ng-template>
+
+<!-- ngSwitch -->
+<div>
+  <button class="btn btn-primary" (click)="toggle()">Home screen</button>
+  <button class="btn btn-success" (click)="toggle()">Profile screen</button>
+</div>
+
+<div [ngSwitch]="isActive">
+  <div *ngSwitchCase="true">
+    <p>Home screen content</p> 
+  </div>
+
+  <div *ngSwitchCase="false">
+    <p>Profile screen content</p>
+  </div>
+</div>
